@@ -20,7 +20,7 @@ Build project with:
 
 You can serve it with:
 
-```npm
+```
 yarn global add serve
 
 serve -s build
