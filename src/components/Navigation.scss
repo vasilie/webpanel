@@ -1,0 +1,21 @@
+.navigation {
+  width: 239px;
+  height: 100%;
+  background-color: #373b5f;
+  position: fixed;
+  left: 0;
+  top: 60px;
+  color: white;
+  a {
+    color: white;
+  }
+}
+ul {
+  list-style-type: none;
+  a {
+    text-decoration: none;
+  }
+}
+.disabled {
+  opacity: 0.4;
+}
