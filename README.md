@@ -10,11 +10,11 @@ Before everything run:
 
 In the project directory, you can run:
 
-### Development
+#### Development
 
 `yarn start`
 
-### Production
+#### Production
 
 Build project with:
 
@@ -22,8 +22,8 @@ Build project with:
 
 You can serve it with:
 
-`yarn global add serve
-  serve -s build`
+```yarn global add serve
+  serve -s build```
 
 
 
