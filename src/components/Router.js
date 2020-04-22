@@ -17,7 +17,7 @@ const PrivateRoute = ({component, ...options}) => {
 };
 
 const Router = () => {
-  const {loading} = useContext(AuthContext);
+  const {loading, user} = useContext(AuthContext);
   if (loading) return <div>Loading...</div>;
   return (
     <div>
@@ -25,8 +25,7 @@ const Router = () => {
       <PrivateRoute path="/" component={Main} />
       <PrivateRoute path="/" component={Navigation} />
       <PrivateRoute path="/list" component={List} />
-
-      <Route exact path="/login" component={LoginForm} />
+      {!user && <Route exact path="/login" component={LoginForm} />}
     </div>
   );
 };
