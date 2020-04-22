@@ -20,8 +20,11 @@ Build project with:
 
 You can serve it with:
 
-`yarn global add serve`
-`serve -s build`
+```npm
+yarn global add serve
+
+serve -s build
+```
 
 
 
