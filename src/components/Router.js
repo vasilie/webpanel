@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import Main from '../components/Main';
-import List from '../components/List';
+import ListPage from '../components/ListPage';
 import Header from '../components/Header';
 import Navigation from '../components/Navigation';
 import {AuthContext} from '../contexts/AuthContext';
@@ -24,7 +24,7 @@ const Router = () => {
       <PrivateRoute path="/" component={Header} />
       <PrivateRoute path="/" component={Main} />
       <PrivateRoute path="/" component={Navigation} />
-      <PrivateRoute path="/list" component={List} />
+      <PrivateRoute path="/" component={ListPage} />
       {!user && <Route exact path="/login" component={LoginForm} />}
     </div>
   );

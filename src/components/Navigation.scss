@@ -4,6 +4,7 @@
   background-color: #373b5f;
   position: fixed;
   left: 0;
+  padding-top: 135px;
   top: 60px;
   color: white;
   a {
@@ -18,4 +19,13 @@ ul {
 }
 .disabled {
   opacity: 0.4;
+}
+.icon {
+  margin-right: 24px;
+  width: 22px;
+}
+.navigation-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 34px;
 }

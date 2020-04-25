@@ -1,7 +1,8 @@
 import React, {createContext, useState, useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
 import UseLocalStorageState from '../hooks/useLocalStorageState';
-import {fetchLogin, getAuthData} from '../api';
+import {loginApi, getAuthData} from '../api';
+const jwt_decode = require('jwt-decode');
 
 export const AuthContext = createContext();
 
@@ -15,8 +16,7 @@ function AuthProvider({history, children}) {
 
   useEffect(() => {
     /* The first time the component is rendered, it tries to
-     * fetch the auth data from a source, like a cookie or
-     * the localStorage.
+     * fetch the auth data from the localStorage.
      */
     const handleAuth = async () => {
       const currentAuth = await getAuthData();
@@ -28,15 +28,26 @@ function AuthProvider({history, children}) {
   }, []);
 
   const login = (username, password) => {
-    const user = fetchLogin({username, password});
-    console.log('USER IN CONTEXT', user);
-    if (user) {
-      const {access_token} = user;
-      setToken(access_token);
-      setAuth({user});
-      history.push('/');
-    }
+    loginApi({username, password}).then(
+      (response) => {
+        const {result} = response.data;
+        const data = jwt_decode(result);
+        const {username, isAdmin} = data;
+        const user = {
+          name: username,
+          role: isAdmin ? 'admin' : '',
+        };
+        setToken(result);
+        setAuth({user, loading: false});
+        history.push('/');
+      },
+      (error) => {
+        setAuth({user: null, error: 'Wrong username password', loading: false});
+        console.log(error);
+      }
+    );
   };
+
   const logout = () => {
     setToken(null);
     setAuth({...initialAuth, loading: false});
