@@ -1,7 +1,7 @@
 import axios from 'axios';
 const jwt_decode = require('jwt-decode');
 
-const BASE_URL = 'http://54.246.154.117';
+const BASE_URL = 'https://54.246.154.117';
 const PORT = 3010;
 
 export const loginApi = (data) =>
