@@ -13,30 +13,26 @@ const initialAuth = {
 function AuthProvider({history, children}) {
   const [auth, setAuth] = useState(initialAuth);
   const [token, setToken] = UseLocalStorageState('access_token', null);
+  const persistentLogin = true;
 
   useEffect(() => {
     /* The first time the component is rendered, it tries to
      * fetch the auth data from the localStorage.
      */
-    const handleAuth = async () => {
-      const currentAuth = await getAuthData();
-      if (currentAuth) {
-        setAuth(currentAuth);
-      }
-    };
-    handleAuth();
+    const currentUser = getUserData(token);
+    if (currentUser) {
+      console.log('currentUser', currentUser);
+      setAuth({user: currentUser, loading: false});
+    } else {
+      setAuth({...initialAuth, loading: false});
+    }
   }, []);
 
   const login = (username, password) => {
     loginApi({username, password}).then(
       (response) => {
         const {result} = response.data;
-        const data = jwt_decode(result);
-        const {username, isAdmin} = data;
-        const user = {
-          name: username,
-          role: isAdmin ? 'admin' : '',
-        };
+        const user = getUserData(result);
         setToken(result);
         setAuth({user, loading: false});
         history.push('/');
@@ -48,6 +44,17 @@ function AuthProvider({history, children}) {
     );
   };
 
+  const getUserData = (token) => {
+    if (token) {
+      const data = jwt_decode(token);
+      const {username, isAdmin} = data;
+      const user = {
+        name: username,
+        role: isAdmin ? 'admin' : '',
+      };
+      return user;
+    }
+  };
   const logout = () => {
     setToken(null);
     setAuth({...initialAuth, loading: false});

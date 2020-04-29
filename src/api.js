@@ -7,47 +7,6 @@ const PORT = 3010;
 export const loginApi = (data) =>
   axios.post(`${BASE_URL}:${PORT}/admin/login`, data);
 
-export const fetchLogin = (data) => {
-  const {username, password} = data;
-
-  axios
-    .post(`${BASE_URL}:${PORT}/admin/login`, {
-      username,
-      password,
-    })
-    .then(
-      (response) => {
-        console.log(response.data.result);
-        const {result} = response.data;
-        const data = jwt_decode(result);
-        const {username, isAdmin} = data;
-        console.log(data);
-        return {
-          name: username,
-          role: isAdmin ? 'admin' : '',
-          access_token: result,
-        };
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-};
-
-// export const fetchLogin = (data) => {
-//   const {username, password} = data;
-
-//   // fetch `
-//   if (username == 'admin' && password == 1234) {
-//     return {
-//       name: 'Admin',
-//       role: 'admin',
-//       access_token: '2ffre55f12k1l2l4k23ogj1o2od3ee22e',
-//     };
-//   } else {
-//     return null;
-//   }
-// };
 const fetchUser = (token) => {
   console.log('FETCHING USER');
   console.log('TOKEN', token);

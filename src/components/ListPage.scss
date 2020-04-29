@@ -24,6 +24,7 @@
 }
 .list-page__filters {
   margin-bottom: 17px;
+  display: flex;
 }
 .list-page__info {
   font-size: 14px;
@@ -34,6 +35,9 @@
     color: #ff4b4b;
   }
 }
+.list-filter {
+  margin-right: 16px;
+}
 .input {
   background: white;
   border: solid 1px #e5e5e5;
@@ -42,6 +46,17 @@
   font-size: 14px;
   line-height: normal;
   height: 40px;
+  width: 100%;
+}
+.input--search {
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    background-image: url('../assets/img/chevron-bottom.svg');
+    width: 22px;
+    height: 22px;
+  }
 }
 .input--big {
   width: 218px;
